@@ -63,7 +63,7 @@ def build(language):
  <link rel="alternate" hreflang="zh-CN" href="zh.html">
  <link rel="alternate" hreflang="x-default" href="index.html">
  <link rel="icon" href="favicon.svg" type="image/svg+xml">
- <link rel="stylesheet" href="style.css">
+ <link rel="stylesheet" href="style.css?v=portrait-20261106-2">
  <script defer src="app.js"></script>
 </head>
 <body id="top">
