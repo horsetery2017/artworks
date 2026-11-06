@@ -4,7 +4,7 @@
 
 ## 本地查看
 
-直接双击 `index.html`，无需安装软件或启动服务器。全部图片、脚本与字体回退均可离线使用。请保留文件之间的相对位置。
+直接双击 `index.html`，默认打开英文页；点击顶部“中文”进入 `zh.html`，点击“EN”返回英文页。两页各自独立显示完整的作品、简介和对应语言的弹窗。无需安装软件或启动服务器。全部图片、脚本与字体回退均可离线使用。请保留文件之间的相对位置。
 
 ## 上传到 GitHub Pages
 
@@ -17,7 +17,7 @@
 
 ## 编辑
 
-- `works.json`：作品名称、描述、图片与图录页码。修改后运行 `python tools/build_page.py`，重新生成 `index.html`。
+- `works.json`：作品名称、描述、图片与图录页码。修改后运行 `python tools/build_page.py`，同时生成英文 `index.html` 与中文 `zh.html`。
 - `artist.json`：艺术家提供的中文个人简介及英文译文。修改后同样运行 `python tools/build_page.py`。
 - `style.css`：颜色、字体、布局与手机样式。
 - `app.js`：大图浏览与双视角交互。
@@ -27,4 +27,4 @@
 
 作品与图片的对应关系已经确认。《向量空间》两幅图片采用中性的“展陈视角 01 / 02”命名。简短作品介绍是依据画面整理的说明，英文作品名为工作译名。个人简介由艺术家提供；院校英文名称参考学校官网：https://www.gzarts.edu.cn/En/About_GAFA/Introduction.htm 和 https://www.joongbu.ac.kr/eng/ 。未补写创作年份、尺寸或联系方式。PDF 中只有静态图像，本版本展示这些静态图像。
 
-上传部署只需要 `index.html`、`style.css`、`app.js`、`favicon.svg`、`.nojekyll` 和整个 `assets` 文件夹。其余文件用于后续编辑，不影响网站运行。
+上传部署需要 `index.html`、`zh.html`、`style.css`、`app.js`、`favicon.svg`、`.nojekyll` 和整个 `assets` 文件夹。其余文件用于后续编辑，不影响网站运行。网站根地址默认显示英文，中文地址为 `https://horsetery2017.github.io/artworks/zh.html`；语言选择无需 JavaScript，也不依赖浏览器语言或缓存设置。
