@@ -4,28 +4,68 @@
     "title": "飞翔矩阵",
     "category": "空间装置",
     "description": "悬置于建筑空间中的几何片体，以不同的方向、尺度与色彩形成一组空中的矩阵。",
-    "images": [{"slug": "flight-matrix", "label": "作品图像", "page": 2}]
+    "images": [
+      {
+        "slug": "flight-matrix",
+        "label": "作品图像",
+        "page": 2,
+        "label_en": "Artwork image"
+      }
+    ],
+    "title_en": "Flight Matrix",
+    "category_en": "Spatial installation",
+    "description_en": "Geometric elements suspended within an architectural space form an aerial matrix of varied orientations, scales and colours."
   },
   {
     "id": "zero-sum",
     "title": "零和世界",
     "category": "数字图像",
     "description": "黑白球体在重复的空间中层叠、延伸，形成近乎无尽的视觉纵深。",
-    "images": [{"slug": "zero-sum", "label": "作品图像", "page": 3}]
+    "images": [
+      {
+        "slug": "zero-sum",
+        "label": "作品图像",
+        "page": 3,
+        "label_en": "Artwork image"
+      }
+    ],
+    "title_en": "Zero-Sum World",
+    "category_en": "Digital image",
+    "description_en": "Black and white spheres layer and extend through a repeating space, creating an almost endless visual depth."
   },
   {
     "id": "lorenz",
     "title": "游于艺之洛伦兹吸引子",
     "category": "装置",
     "description": "红色摇杆嵌入带有绘画痕迹的木质结构。图像呈现了装置的操作界面与材料表面。",
-    "images": [{"slug": "lorenz", "label": "作品图像", "page": 4}]
+    "images": [
+      {
+        "slug": "lorenz",
+        "label": "作品图像",
+        "page": 4,
+        "label_en": "Artwork image"
+      }
+    ],
+    "title_en": "Wandering in Art: Lorenz Attractor",
+    "category_en": "Installation",
+    "description_en": "Red joysticks are embedded in a wooden structure marked with paint. The image records the interface and material surfaces of the installation."
   },
   {
     "id": "wang-and-chen",
     "title": "王小波与陈清扬",
     "category": "艺术装置",
     "description": "人物、旧式显示器与数字化的自然场景共同出现，连接线在身体和设备之间展开。",
-    "images": [{"slug": "wang-and-chen", "label": "作品图像", "page": 3}]
+    "images": [
+      {
+        "slug": "wang-and-chen",
+        "label": "作品图像",
+        "page": 3,
+        "label_en": "Artwork image"
+      }
+    ],
+    "title_en": "Wang Xiaobo and Chen Qingyang",
+    "category_en": "Art installation",
+    "description_en": "A figure, an old monitor and a digitally rendered natural setting appear together, with cables extending between the body and the device."
   },
   {
     "id": "formal-machine",
@@ -33,7 +73,18 @@
     "subtitle": "单体",
     "category": "装置",
     "description": "屏幕中的文字、符号与图形并置于墙面的凹槽之中，构成多层的阅读界面。",
-    "images": [{"slug": "formal-machine", "label": "单体图像", "page": 5}]
+    "images": [
+      {
+        "slug": "formal-machine",
+        "label": "单体图像",
+        "page": 5,
+        "label_en": "Individual unit"
+      }
+    ],
+    "title_en": "Poetry Shaped by Objects: Formal Machine",
+    "category_en": "Installation",
+    "description_en": "Text, symbols and graphics on screens are set within recesses in a wall, forming multiple layers of reading.",
+    "subtitle_en": "Individual unit"
   },
   {
     "id": "buffer-zone",
@@ -41,7 +92,18 @@
     "subtitle": "整体",
     "category": "装置",
     "description": "木质座椅、屏幕与摇杆相互组合，图像投射到墙面，让装置延伸进所在的空间。",
-    "images": [{"slug": "buffer-zone", "label": "整体图像", "page": 6}]
+    "images": [
+      {
+        "slug": "buffer-zone",
+        "label": "整体图像",
+        "page": 6,
+        "label_en": "Overall view"
+      }
+    ],
+    "title_en": "Poetry Shaped by Objects: Buffer Zone",
+    "category_en": "Installation",
+    "description_en": "Wooden seats, screens and joysticks are combined with images projected onto a wall, extending the installation into its surroundings.",
+    "subtitle_en": "Overall installation"
   },
   {
     "id": "vector-space",
@@ -49,15 +111,38 @@
     "category": "互动装置",
     "description": "人体形态、支架、屏幕与线缆共同构成装置。两幅图像记录了不同观看角度下的整体结构。",
     "images": [
-      {"slug": "vector-view-1", "label": "展陈视角 01", "page": 7},
-      {"slug": "vector-view-2", "label": "展陈视角 02", "page": 8}
-    ]
+      {
+        "slug": "vector-view-1",
+        "label": "展陈视角 01",
+        "page": 7,
+        "label_en": "Exhibition view 01"
+      },
+      {
+        "slug": "vector-view-2",
+        "label": "展陈视角 02",
+        "page": 8,
+        "label_en": "Exhibition view 02"
+      }
+    ],
+    "title_en": "Vector Space",
+    "category_en": "Interactive installation",
+    "description_en": "A human form, supports, screens and cables compose the installation. Two images record its overall structure from different viewpoints."
   },
   {
     "id": "ai-insect",
     "title": "下雨天我在朽木中做了一只AI虫子",
     "category": "装置",
     "description": "朽木的天然孔洞中嵌入像素屏幕，摇杆与按钮置于木材表面，形成自然材料与电子界面的并置。",
-    "images": [{"slug": "ai-insect", "label": "作品图像", "page": 9}]
+    "images": [
+      {
+        "slug": "ai-insect",
+        "label": "作品图像",
+        "page": 9,
+        "label_en": "Artwork image"
+      }
+    ],
+    "title_en": "On a Rainy Day, I Made an AI Insect in Decaying Wood",
+    "category_en": "Installation",
+    "description_en": "A pixel display is embedded in a natural cavity in decaying wood, with a joystick and buttons on its surface, bringing natural material and an electronic interface together."
   }
 ]

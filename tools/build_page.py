@@ -8,6 +8,9 @@ works=json.loads((ROOT/'works.json').read_text(encoding='utf-8'))
 manifest={x['slug']:x for x in json.loads((ROOT/'assets/image-manifest.json').read_text(encoding='utf-8'))}
 esc=html.escape
 
+def bi(zh,en):
+    return f'{esc(zh)}<span class="en" lang="en">{esc(en)}</span>'
+
 def image(slug,alt,eager=False,css=''):
     entry=manifest[slug]['preview']
     return (f'<img src="{entry["path"]}" width="{entry["width"]}" height="{entry["height"]}" '
@@ -21,22 +24,22 @@ for i,w in enumerate(works):
     subtitle=f'<span class="subtitle">（{esc(w["subtitle"])}）</span>' if w.get('subtitle') else ''
     variant=''
     if len(w['images'])>1:
-        variant='<div class="variant-switch" aria-label="作品观看角度">'+''.join(
-            f'<button type="button" data-variant="{j}" data-work="{w["id"]}" aria-pressed="{str(j==0).lower()}">{esc(im["label"])}</button>'
+        variant='<div class="variant-switch" aria-label="作品观看角度 / Artwork viewpoints">'+''.join(
+            f'<button type="button" data-variant="{j}" data-work="{w["id"]}" aria-pressed="{str(j==0).lower()}">{bi(im["label"],im["label_en"])}</button>'
             for j,im in enumerate(w['images']))+'</div>'
     cards.append(f'''<article class="work-card" id="work-{w['id']}">
   <div class="work-visual">
-    <button class="image-button" type="button" data-open="{w['id']}" aria-label="查看《{esc(w['title'])}》大图">
-      {image(w['images'][0]['slug'], w['title']+' · '+w['images'][0]['label'])}
+    <button class="image-button" type="button" data-open="{w['id']}" aria-label="查看《{esc(w['title'])}》大图 / View {esc(w['title_en'])}">
+      {image(w['images'][0]['slug'], w['title']+' / '+w['title_en']+' · '+w['images'][0]['label']+' / '+w['images'][0]['label_en'])}
     </button>
     {variant}
   </div>
-  <div class="work-heading"><span class="work-number">{number}</span><h3>{esc(w['title'])}{subtitle}</h3></div>
-  <p class="work-category">{esc(w['category'])}</p>
-  <p class="work-description">{esc(w['description'])}</p>
-  <div class="work-foot"><button class="open-text" type="button" data-open="{w['id']}">查看作品 <span aria-hidden="true">↗</span></button><span class="work-view-count">{len(w['images']):02d} 幅图像</span></div>
+  <div class="work-heading"><span class="work-number">{number}</span><h3>{esc(w['title'])}{subtitle}<span class="en" lang="en">{esc(w['title_en'])}{' ('+esc(w['subtitle_en'])+')' if w.get('subtitle_en') else ''}</span></h3></div>
+  <p class="work-category">{bi(w['category'],w['category_en'])}</p>
+  <p class="work-description">{bi(w['description'],w['description_en'])}</p>
+  <div class="work-foot"><button class="open-text" type="button" data-open="{w['id']}">{bi('查看作品','View artwork')} <span aria-hidden="true">↗</span></button><span class="work-view-count">{bi(str(len(w['images']))+' 幅图像',str(len(w['images']))+(' image' if len(w['images'])==1 else ' images'))}</span></div>
 </article>''')
-    index.append(f'<li><a href="#work-{w["id"]}"><span class="index-no">{number}</span><span>{esc(w["title"])}</span><span aria-hidden="true">↗</span></a></li>')
+    index.append(f'<li><a href="#work-{w["id"]}"><span class="index-no">{number}</span><span>{bi(w["title"],w["title_en"])}</span><span aria-hidden="true">↗</span></a></li>')
 
 page='''<!doctype html>
 <html lang="zh-CN">
@@ -106,7 +109,39 @@ page='''<!doctype html>
 </body>
 </html>
 '''
-page=page.replace('__HERO__',image('zero-sum','零和世界 · 黑白球体构成的数字图像',True))
+copy={
+ '跳到作品':'Skip to artworks', '作品':'Works', '目录':'Index', '图录':'Catalogue',
+ '装置、互动与数字图像。':'Installations, interaction and digital imagery.',
+ '一份关于空间、界面与物的作品记录。':'A record of works exploring space, interfaces and objects.',
+ '浏览作品':'Browse works', '件作品 / 09 幅图像':'works / 09 images',
+ '零和世界':'Zero-Sum World', '02 / 08 · 数字图像':'02 / 08 · Digital image',
+ '循图像，进入作品。':'Enter the works through their images.', '点击查看完整大图':'Click to view full images',
+ '关于这个选集':'About this selection',
+ '本页整理《陈国军部分作品》中的八件作品与九幅图像。《向量空间》保留两个观看视角；作品图像按原始比例呈现。':'This page presents eight works and nine images from Selected Works by Chen Guojun. Vector Space includes two viewpoints; all artwork images retain their original proportions.',
+ '作品名称据原始图录。简短图像说明为网页整理文字。原资料未提供的创作年份、尺寸与艺术家履历，未在此页补写。':'Chinese titles follow the source catalogue. English titles and brief image descriptions were prepared for this website. Dates, dimensions and an artist biography were not supplied and have not been added.',
+ '下载原始作品集':'Download source catalogue', '作品图像与名称据原始图录整理':'Artwork images and titles compiled from the source catalogue',
+ '单独查看原图 ↗':'Open full-size image ↗', '图录对应页 ↗':'Source catalogue page ↗',
+ '← 上一件':'← Previous work', '下一件 →':'Next work →',
+}
+# Translate text nodes in the page template, before inserting bilingual artwork cards.
+import re
+page=re.sub(r'>([^<>]+)<',lambda m:'>'+bi(m[1],copy[m[1]])+'<' if m[1] in copy else m[0],page)
+page=page.replace('浏览作品 <span',bi('浏览作品','Browse works')+' <span')
+page=page.replace('下载原始作品集 <span',bi('下载原始作品集','Download source catalogue')+' <span')
+page=page.replace('A SELECTION / 01—08','作品选集 / A SELECTION / 01—08')
+page=page.replace('>WORK INDEX<','>作品目录 / WORK INDEX<').replace('>COLOPHON<','>图录说明 / COLOPHON<')
+page=page.replace('>SELECTED WORKS<br>','>作品选集 / SELECTED WORKS<br>')
+page=page.replace('<span class="pdf-word">原始 </span>PDF','<span class="pdf-word">原始 / Original </span>PDF')
+page=page.replace('件作品 / 09 幅图像</span>','件作品 / 09 幅图像<span class="en" lang="en">works / 09 images</span></span>')
+for zh,en in {'主导航':'Main navigation','陈国军作品集首页':'Chen Guojun portfolio home','查看《零和世界》大图':'View Zero-Sum World','关闭大图':'Close image viewer','选择观看视角':'Choose a viewpoint','作品观看角度':'Artwork viewpoints'}.items():
+ page=page.replace(f'aria-label="{zh}"',f'aria-label="{zh} / {en}"')
+page=page.replace('作品图像与名称可直接浏览；启用 JavaScript 后可点击放大。也可以',bi('作品图像与名称可直接浏览；启用 JavaScript 后可点击放大。','Artwork images and titles are available without JavaScript. Enable JavaScript to use the image viewer.'))
+page=page.replace('打开完整 PDF',bi('打开完整 PDF','Open the complete PDF'))
+page=page.replace('陈国军 · 作品选集 / CHEN GUOJUN','陈国军 · 作品选集 / CHEN GUOJUN · SELECTED WORKS')
+page=page.replace('content="陈国军 · 作品选集"','content="陈国军 · 作品选集 / Chen Guojun · Selected Works"')
+page=page.replace('装置、互动与数字图像。">','装置、互动与数字图像。 / Chen Guojun: selected installations, interactive works and digital imagery.">')
+page=page.replace('八件作品，九幅图像。装置、互动与数字图像的作品记录。','八件作品，九幅图像。装置、互动与数字图像的作品记录。 / Eight works, nine images. Installations, interaction and digital imagery.')
+page=page.replace('__HERO__',image('zero-sum','零和世界 / Zero-Sum World · 黑白球体构成的数字图像 / A digital image of black and white spheres',True))
 page=page.replace('__CARDS__','\n'.join(cards)).replace('__INDEX__','\n'.join(index))
 page=page.replace('__DATA__',json.dumps(works,ensure_ascii=False).replace('</','<\\/'))
 (ROOT/'index.html').write_text(page,encoding='utf-8')

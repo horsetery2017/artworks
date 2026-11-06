@@ -15,15 +15,17 @@ async function main(){
  const assert=(condition,label)=>{if(!condition)throw Error(label);checks.push(label)};
  const shot=async name=>{const r=await call('Page.captureScreenshot',{format:'png'});fs.writeFileSync(path.join(qa,name+'.png'),Buffer.from(r.data,'base64'))};
  await call('Page.enable');await call('Runtime.enable');await call('Network.enable');
- for(const [name,width,height] of [['desktop',1440,1000],['mobile',393,852]]){
+ for(const [name,width,height] of [['desktop',1440,1000],['mobile',393,852],['small-mobile',320,740]]){
   await call('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:name==='mobile'});
   await call('Page.navigate',{url:`http://127.0.0.1:${server.address().port}/`});await delay(500);
   await ev(`Promise.all([...document.images].filter(i=>i.getAttribute('src')).map(i=>{i.loading='eager';return i.decode()})).then(()=>document.fonts.ready).then(()=>true)`);
   assert(await ev('document.querySelectorAll(".work-card").length===8'),name+' eight artworks');
+  assert(await ev('JSON.parse(document.querySelector("#work-data").textContent).every(w=>w.title_en&&w.category_en&&w.description_en&&w.images.every(i=>i.label_en))'),name+' bilingual artwork metadata');
+  assert(await ev('[...document.querySelectorAll(".work-card")].every(c=>c.querySelector("h3 [lang=en]")&&c.querySelector(".work-description [lang=en]"))'),name+' bilingual titles and descriptions rendered');
   assert(await ev('document.documentElement.scrollWidth<=innerWidth'),name+' no horizontal overflow');
   await shot(name);
   const metrics=await call('Page.getLayoutMetrics');const full=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width,height:Math.ceil(metrics.cssContentSize.height),scale:1}});fs.writeFileSync(path.join(qa,name+'-full.png'),Buffer.from(full.data,'base64'));
-  await ev('document.querySelector("[data-open]").click()');assert(await ev('document.querySelector("dialog").open'),name+' dialog opens');await delay(200);await shot(name+'-dialog');
+  await ev('document.querySelector("[data-open]").click()');assert(await ev('document.querySelector("dialog").open'),name+' dialog opens');assert(await ev('document.querySelector("#dialog-title [lang=en]").textContent==="Zero-Sum World" && !!document.querySelector("#dialog-description [lang=en]").textContent'),name+' bilingual dialog');await delay(200);await shot(name+'-dialog');
   await ev('document.querySelector("#next-work").click()');assert(await ev('document.querySelector("#dialog-counter").textContent.includes("03")'),name+' next artwork');
   await call('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});await call('Input.dispatchKeyEvent',{type:'keyUp',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});assert(await ev('!document.querySelector("dialog").open'),name+' escape closes');
   await ev('document.querySelectorAll("[data-variant]")[1].click();document.querySelectorAll("[data-variant]")[1].closest(".work-card").querySelector("[data-open]").click()');assert(await ev('document.querySelectorAll(".view-thumb")[1].getAttribute("aria-pressed")==="true"'),name+' second view retained');
