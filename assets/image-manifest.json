@@ -1,0 +1,191 @@
+[
+  {
+    "slug": "flight-matrix",
+    "page": 2,
+    "xref": 21,
+    "source_size": [
+      3072,
+      4096
+    ],
+    "preview": {
+      "path": "assets/images/flight-matrix-preview.webp",
+      "width": 1050,
+      "height": 1400,
+      "bytes": 142350
+    },
+    "full": {
+      "path": "assets/images/flight-matrix-full.webp",
+      "width": 2250,
+      "height": 3000,
+      "bytes": 885448
+    }
+  },
+  {
+    "slug": "zero-sum",
+    "page": 3,
+    "xref": 24,
+    "source_size": [
+      2161,
+      2160
+    ],
+    "preview": {
+      "path": "assets/images/zero-sum-preview.webp",
+      "width": 1400,
+      "height": 1399,
+      "bytes": 677216
+    },
+    "full": {
+      "path": "assets/images/zero-sum-full.webp",
+      "width": 2161,
+      "height": 2160,
+      "bytes": 2050664
+    }
+  },
+  {
+    "slug": "wang-and-chen",
+    "page": 3,
+    "xref": 25,
+    "source_size": [
+      1527,
+      858
+    ],
+    "preview": {
+      "path": "assets/images/wang-and-chen-preview.webp",
+      "width": 1400,
+      "height": 787,
+      "bytes": 254446
+    },
+    "full": {
+      "path": "assets/images/wang-and-chen-full.webp",
+      "width": 1527,
+      "height": 858,
+      "bytes": 385914
+    }
+  },
+  {
+    "slug": "lorenz",
+    "page": 4,
+    "xref": 28,
+    "source_size": [
+      1279,
+      1706
+    ],
+    "preview": {
+      "path": "assets/images/lorenz-preview.webp",
+      "width": 1050,
+      "height": 1400,
+      "bytes": 245230
+    },
+    "full": {
+      "path": "assets/images/lorenz-full.webp",
+      "width": 1279,
+      "height": 1706,
+      "bytes": 456570
+    }
+  },
+  {
+    "slug": "formal-machine",
+    "page": 5,
+    "xref": 31,
+    "source_size": [
+      4789,
+      3193
+    ],
+    "preview": {
+      "path": "assets/images/formal-machine-preview.webp",
+      "width": 1400,
+      "height": 933,
+      "bytes": 248390
+    },
+    "full": {
+      "path": "assets/images/formal-machine-full.webp",
+      "width": 3000,
+      "height": 2000,
+      "bytes": 2242000
+    }
+  },
+  {
+    "slug": "buffer-zone",
+    "page": 6,
+    "xref": 34,
+    "source_size": [
+      3743,
+      4853
+    ],
+    "preview": {
+      "path": "assets/images/buffer-zone-preview.webp",
+      "width": 1080,
+      "height": 1400,
+      "bytes": 164244
+    },
+    "full": {
+      "path": "assets/images/buffer-zone-full.webp",
+      "width": 2314,
+      "height": 3000,
+      "bytes": 2207272
+    }
+  },
+  {
+    "slug": "vector-view-1",
+    "page": 7,
+    "xref": 37,
+    "source_size": [
+      3024,
+      4032
+    ],
+    "preview": {
+      "path": "assets/images/vector-view-1-preview.webp",
+      "width": 1050,
+      "height": 1400,
+      "bytes": 118786
+    },
+    "full": {
+      "path": "assets/images/vector-view-1-full.webp",
+      "width": 2250,
+      "height": 3000,
+      "bytes": 882862
+    }
+  },
+  {
+    "slug": "vector-view-2",
+    "page": 8,
+    "xref": 40,
+    "source_size": [
+      3024,
+      4032
+    ],
+    "preview": {
+      "path": "assets/images/vector-view-2-preview.webp",
+      "width": 1050,
+      "height": 1400,
+      "bytes": 137532
+    },
+    "full": {
+      "path": "assets/images/vector-view-2-full.webp",
+      "width": 2250,
+      "height": 3000,
+      "bytes": 905028
+    }
+  },
+  {
+    "slug": "ai-insect",
+    "page": 9,
+    "xref": 43,
+    "source_size": [
+      4096,
+      3072
+    ],
+    "preview": {
+      "path": "assets/images/ai-insect-preview.webp",
+      "width": 1400,
+      "height": 1050,
+      "bytes": 257100
+    },
+    "full": {
+      "path": "assets/images/ai-insect-full.webp",
+      "width": 3000,
+      "height": 2250,
+      "bytes": 1312108
+    }
+  }
+]

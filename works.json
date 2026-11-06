@@ -1,0 +1,63 @@
+[
+  {
+    "id": "flight-matrix",
+    "title": "飞翔矩阵",
+    "category": "空间装置",
+    "description": "悬置于建筑空间中的几何片体，以不同的方向、尺度与色彩形成一组空中的矩阵。",
+    "images": [{"slug": "flight-matrix", "label": "作品图像", "page": 2}]
+  },
+  {
+    "id": "zero-sum",
+    "title": "零和世界",
+    "category": "数字图像",
+    "description": "黑白球体在重复的空间中层叠、延伸，形成近乎无尽的视觉纵深。",
+    "images": [{"slug": "zero-sum", "label": "作品图像", "page": 3}]
+  },
+  {
+    "id": "lorenz",
+    "title": "游于艺之洛伦兹吸引子",
+    "category": "装置",
+    "description": "红色摇杆嵌入带有绘画痕迹的木质结构。图像呈现了装置的操作界面与材料表面。",
+    "images": [{"slug": "lorenz", "label": "作品图像", "page": 4}]
+  },
+  {
+    "id": "wang-and-chen",
+    "title": "王小波与陈清扬",
+    "category": "艺术装置",
+    "description": "人物、旧式显示器与数字化的自然场景共同出现，连接线在身体和设备之间展开。",
+    "images": [{"slug": "wang-and-chen", "label": "作品图像", "page": 3}]
+  },
+  {
+    "id": "formal-machine",
+    "title": "以物形诗之形式机器",
+    "subtitle": "单体",
+    "category": "装置",
+    "description": "屏幕中的文字、符号与图形并置于墙面的凹槽之中，构成多层的阅读界面。",
+    "images": [{"slug": "formal-machine", "label": "单体图像", "page": 5}]
+  },
+  {
+    "id": "buffer-zone",
+    "title": "以物形诗之缓冲区",
+    "subtitle": "整体",
+    "category": "装置",
+    "description": "木质座椅、屏幕与摇杆相互组合，图像投射到墙面，让装置延伸进所在的空间。",
+    "images": [{"slug": "buffer-zone", "label": "整体图像", "page": 6}]
+  },
+  {
+    "id": "vector-space",
+    "title": "向量空间",
+    "category": "互动装置",
+    "description": "人体形态、支架、屏幕与线缆共同构成装置。两幅图像记录了不同观看角度下的整体结构。",
+    "images": [
+      {"slug": "vector-view-1", "label": "展陈视角 01", "page": 7},
+      {"slug": "vector-view-2", "label": "展陈视角 02", "page": 8}
+    ]
+  },
+  {
+    "id": "ai-insect",
+    "title": "下雨天我在朽木中做了一只AI虫子",
+    "category": "装置",
+    "description": "朽木的天然孔洞中嵌入像素屏幕，摇杆与按钮置于木材表面，形成自然材料与电子界面的并置。",
+    "images": [{"slug": "ai-insect", "label": "作品图像", "page": 9}]
+  }
+]
