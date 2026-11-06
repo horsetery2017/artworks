@@ -19,8 +19,6 @@
   picture.src = path(image.slug);
   picture.alt = `${field(work, 'title')} · ${field(image, 'label')}`;
   document.querySelector('#original-image-link').href = path(image.slug);
-  document.querySelector('#source-page-link').href = `assets/chen-guojun-selected-works.pdf#page=${image.page}`;
-  document.querySelector('#dialog-source').textContent = text(`${image.label} / 原始图录第 ${image.page} 页`, `${image.label_en} / Source catalogue, page ${image.page}`);
   dialog.querySelectorAll('.view-thumb').forEach((button, i) => button.setAttribute('aria-pressed', String(i === view)));
  }
 

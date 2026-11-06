@@ -1,4 +1,4 @@
-﻿"""Generate independent English and Chinese static pages for GitHub Pages."""
+"""Generate independent English and Chinese static pages for GitHub Pages."""
 from pathlib import Path
 import html
 import json
@@ -44,7 +44,6 @@ def build(language):
     hero_alt = text('人物水墨绘画，背景有山水与弯月', 'An ink painting of a figure, with a landscape and crescent moon')
     title = text('陈国军 · 作品选集', 'Chen Guojun · Selected Works')
     description = text('陈国军的作品与个人简介：数字媒体、互动装置与电子游戏。', 'Selected works and biography of Chen Guojun: digital media, interactive installations and video games.')
-    note = text('作品图像据原始图录。作品说明、年代及个人简介由艺术家提供；英文为译文。', 'Artwork images are drawn from the source catalogue. Descriptions, dates and biography were provided by the artist; the English text is a translation.')
     data = json.dumps(works, ensure_ascii=False).replace('</', '<\\/')
     page = f'''<!doctype html>
 <html lang="{lang}">
@@ -63,7 +62,7 @@ def build(language):
  <link rel="alternate" hreflang="zh-CN" href="zh.html">
  <link rel="alternate" hreflang="x-default" href="index.html">
  <link rel="icon" href="favicon.svg" type="image/svg+xml">
- <link rel="stylesheet" href="style.css?v=portrait-20261106-2">
+ <link rel="stylesheet" href="style.css?v=portrait-full-20261106-3">
  <script defer src="app.js"></script>
 </head>
 <body id="top">
@@ -91,16 +90,15 @@ def build(language):
    <div class="section-top"><h2 class="section-title" id="works-title">{text('作品', 'Works')}</h2></div>
    <div class="work-grid">{''.join(cards)}</div>
   </section>
-  <section class="colophon" aria-label="{text('图录说明', 'Catalogue notes')}"><div class="colophon-content"><p class="colophon-note">{esc(note)}</p><a class="download" href="assets/chen-guojun-selected-works.pdf" download="chen-guojun-selected-works.pdf">{text('下载原始作品集', 'Download source catalogue')} <span>PDF · 11.2 MB ↗</span></a></div></section>
  </main>
  <footer class="site-footer"><span>{esc(name)}</span><a href="#top">{text('回到顶部', 'Back to top')} ↑</a></footer>
 </div>
 <dialog id="work-dialog" aria-labelledby="dialog-title">
  <div class="dialog-top"><span id="dialog-counter">{text('作品', 'Work')}</span><button class="close-dialog" type="button" aria-label="{text('关闭大图', 'Close image viewer')}">×</button></div>
  <div class="dialog-body"><div class="dialog-figure"><img id="dialog-image" alt=""></div>
- <div class="dialog-info"><h2 id="dialog-title"></h2><span class="dialog-category" id="dialog-category"></span><p class="dialog-year" id="dialog-year"></p><p class="dialog-description" id="dialog-description"></p><div class="dialog-views" id="dialog-views" aria-label="{text('选择观看视角', 'Choose a viewpoint')}"></div><div class="dialog-source" id="dialog-source"></div><div class="dialog-links"><a id="original-image-link" target="_blank" rel="noopener">{text('单独查看大图', 'Open full-size image')} ↗</a><a id="source-page-link" target="_blank" rel="noopener">{text('图录对应页', 'Source catalogue page')} ↗</a></div><div class="dialog-navigation"><button type="button" id="previous-work">← {text('上一件', 'Previous work')}</button><button type="button" id="next-work">{text('下一件', 'Next work')} →</button></div></div></div>
+ <div class="dialog-info"><h2 id="dialog-title"></h2><span class="dialog-category" id="dialog-category"></span><p class="dialog-year" id="dialog-year"></p><p class="dialog-description" id="dialog-description"></p><div class="dialog-views" id="dialog-views" aria-label="{text('选择观看视角', 'Choose a viewpoint')}"></div><div class="dialog-links"><a id="original-image-link" target="_blank" rel="noopener">{text('单独查看大图', 'Open full-size image')} ↗</a></div><div class="dialog-navigation"><button type="button" id="previous-work">← {text('上一件', 'Previous work')}</button><button type="button" id="next-work">{text('下一件', 'Next work')} →</button></div></div></div>
 </dialog>
-<noscript><div class="shell no-script">{text('作品图像与名称可直接浏览；启用 JavaScript 后可点击放大。', 'Artwork images and titles are available without JavaScript. Enable JavaScript to use the image viewer.')} <a href="assets/chen-guojun-selected-works.pdf">{text('打开完整 PDF', 'Open the complete PDF')}</a></div></noscript>
+<noscript><div class="shell no-script">{text('作品图像与名称可直接浏览；启用 JavaScript 后可点击放大。', 'Artwork images and titles are available without JavaScript. Enable JavaScript to use the image viewer.')}</div></noscript>
 <script type="application/json" id="work-data">{data}</script>
 </body>
 </html>

@@ -31,6 +31,8 @@ async function main(){
   assert(await ev(`document.querySelectorAll('.artist-biography p').length===3 && document.querySelector('.artist-biography').textContent.includes(${JSON.stringify(language==='en'?'Joongbu University':'生于中国湖南')})`),name+' complete localized biography');
   assert(await ev(`!/[一-鿿]/.test(document.body.innerText.replace('中文',''))`)===(language==='en'),name+' single language content');
   assert(await ev('document.documentElement.scrollWidth<=innerWidth'),name+' no horizontal overflow');
+  const portraitWidth=await ev('document.querySelector(".hero-portrait").getBoundingClientRect().width');
+  assert(portraitWidth>(width>700?500:(width-40)*.95),name+' introductory image uses full column width ('+Math.round(portraitWidth)+'px)');
   await shot(name);
   const metrics=await call('Page.getLayoutMetrics');const full=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width,height:Math.ceil(metrics.cssContentSize.height),scale:1}});fs.writeFileSync(path.join(qa,name+'-full.png'),Buffer.from(full.data,'base64'));
   await ev('document.querySelector("#work-zero-sum [data-open]").click()');assert(await ev('document.querySelector("dialog").open'),name+' dialog opens');assert(await ev(`document.querySelector('#dialog-title').textContent===${JSON.stringify(language==='en'?'Zero-Sum World':'零和世界')} && !!document.querySelector('#dialog-description').textContent`),name+' localized dialog');await delay(200);await shot(name+'-dialog');
