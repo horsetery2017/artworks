@@ -29,6 +29,7 @@
   const work = works[active];
   document.querySelector('#dialog-title').textContent = field(work, 'title') + (work.subtitle ? text(`（${work.subtitle}）`, ` (${work.subtitle_en})`) : '');
   document.querySelector('#dialog-category').textContent = field(work, 'category');
+  document.querySelector('#dialog-year').textContent = `${text('年代', 'Year')} · ${work.year}`;
   document.querySelector('#dialog-description').textContent = field(work, 'description');
   document.querySelector('#dialog-counter').textContent = `${text('作品', 'Work')} ${String(active + 1).padStart(2, '0')} / ${String(works.length).padStart(2, '0')}`;
   const views = document.querySelector('#dialog-views');
@@ -52,7 +53,7 @@
   opener = button;
   const card = button.closest('.work-card');
   const pressed = card?.querySelector('[data-variant][aria-pressed="true"]');
-  renderWork(byId(button.dataset.open), pressed ? Number(pressed.dataset.variant) : 0);
+  renderWork(byId(button.dataset.open), button.dataset.view !== undefined ? Number(button.dataset.view) : (pressed ? Number(pressed.dataset.variant) : 0));
   dialog.showModal();
  }));
  document.querySelectorAll('[data-variant]').forEach(button => button.addEventListener('click', () => {

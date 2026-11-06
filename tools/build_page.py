@@ -28,17 +28,12 @@ def build(language):
     for i, work in enumerate(works):
         title = field(work, 'title')
         subtitle = f'<span class="subtitle">{esc(field(work, "subtitle"))}</span>' if work.get('subtitle') else ''
-        variants = ''
-        if len(work['images']) > 1:
-            buttons = ''.join(
-                f'<button type="button" data-variant="{j}" data-work="{work["id"]}" aria-pressed="{str(j == 0).lower()}">{esc(field(im, "label"))}</button>'
-                for j, im in enumerate(work['images']))
-            variants = f'<div class="variant-switch" aria-label="{text("作品观看角度", "Artwork viewpoints")}">{buttons}</div>'
         label = text(f'查看《{title}》大图', f'View {title}')
-        alt = title + ' · ' + field(work['images'][0], 'label')
+        images = ''.join(f'<figure><button class="image-button" type="button" data-open="{work["id"]}" data-view="{j}" aria-label="{esc(label+" · "+field(im,"label"))}">{image(im["slug"], title+" · "+field(im,"label"))}</button>'+ (f'<figcaption>{esc(field(im,"label"))}</figcaption>' if len(work['images'])>1 else '')+'</figure>' for j,im in enumerate(work['images']))
         cards.append(f'''<article class="work-card" id="work-{work['id']}">
- <div class="work-visual"><button class="image-button" type="button" data-open="{work['id']}" aria-label="{esc(label)}">{image(work['images'][0]['slug'], alt)}</button>{variants}</div>
+ <div class="work-visual {'multiple-views' if len(work['images'])>1 else ''}">{images}</div>
  <div class="work-heading"><span class="work-number">{i + 1:02d}</span><h3>{esc(title)}{subtitle}</h3></div>
+ <div class="work-details"><p class="work-year"><span>{text('年代', 'Year')}</span> <time>{esc(work['year'])}</time></p><div class="work-description">{''.join('<p>'+esc(paragraph)+'</p>' for paragraph in field(work, 'description').split(chr(10)))}</div></div>
 </article>''')
 
     en_current = ' aria-current="page"' if english else ''
@@ -50,7 +45,7 @@ def build(language):
     hero_alt = text('零和世界 · 黑白球体构成的数字图像', 'Zero-Sum World · A digital image of black and white spheres')
     title = text('陈国军 · 作品选集', 'Chen Guojun · Selected Works')
     description = text('陈国军的作品与个人简介：数字媒体、互动装置与电子游戏。', 'Selected works and biography of Chen Guojun: digital media, interactive installations and video games.')
-    note = text('作品名称据原始图录，英文名称为工作译名。作品说明为网页整理文字，个人简介由艺术家提供。', 'Chinese artwork titles follow the source catalogue; English titles are working translations. Artwork descriptions were prepared for this website. The biography was provided by the artist.')
+    note = text('作品图像据原始图录。作品说明、年代及个人简介由艺术家提供；英文为译文。', 'Artwork images are drawn from the source catalogue. Descriptions, dates and biography were provided by the artist; the English text is a translation.')
     data = json.dumps(works, ensure_ascii=False).replace('</', '<\\/')
     page = f'''<!doctype html>
 <html lang="{lang}">
@@ -104,7 +99,7 @@ def build(language):
 <dialog id="work-dialog" aria-labelledby="dialog-title">
  <div class="dialog-top"><span id="dialog-counter">{text('作品', 'Work')}</span><button class="close-dialog" type="button" aria-label="{text('关闭大图', 'Close image viewer')}">×</button></div>
  <div class="dialog-body"><div class="dialog-figure"><img id="dialog-image" alt=""></div>
- <div class="dialog-info"><h2 id="dialog-title"></h2><span class="dialog-category" id="dialog-category"></span><p class="dialog-description" id="dialog-description"></p><div class="dialog-views" id="dialog-views" aria-label="{text('选择观看视角', 'Choose a viewpoint')}"></div><div class="dialog-source" id="dialog-source"></div><div class="dialog-links"><a id="original-image-link" target="_blank" rel="noopener">{text('单独查看大图', 'Open full-size image')} ↗</a><a id="source-page-link" target="_blank" rel="noopener">{text('图录对应页', 'Source catalogue page')} ↗</a></div><div class="dialog-navigation"><button type="button" id="previous-work">← {text('上一件', 'Previous work')}</button><button type="button" id="next-work">{text('下一件', 'Next work')} →</button></div></div></div>
+ <div class="dialog-info"><h2 id="dialog-title"></h2><span class="dialog-category" id="dialog-category"></span><p class="dialog-year" id="dialog-year"></p><p class="dialog-description" id="dialog-description"></p><div class="dialog-views" id="dialog-views" aria-label="{text('选择观看视角', 'Choose a viewpoint')}"></div><div class="dialog-source" id="dialog-source"></div><div class="dialog-links"><a id="original-image-link" target="_blank" rel="noopener">{text('单独查看大图', 'Open full-size image')} ↗</a><a id="source-page-link" target="_blank" rel="noopener">{text('图录对应页', 'Source catalogue page')} ↗</a></div><div class="dialog-navigation"><button type="button" id="previous-work">← {text('上一件', 'Previous work')}</button><button type="button" id="next-work">{text('下一件', 'Next work')} →</button></div></div></div>
 </dialog>
 <noscript><div class="shell no-script">{text('作品图像与名称可直接浏览；启用 JavaScript 后可点击放大。', 'Artwork images and titles are available without JavaScript. Enable JavaScript to use the image viewer.')} <a href="assets/chen-guojun-selected-works.pdf">{text('打开完整 PDF', 'Open the complete PDF')}</a></div></noscript>
 <script type="application/json" id="work-data">{data}</script>

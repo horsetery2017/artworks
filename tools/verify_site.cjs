@@ -26,6 +26,8 @@ async function main(){
   assert(await ev(`document.documentElement.lang===${JSON.stringify(language==='en'?'en':'zh-CN')}`),name+' correct document language');
   assert(await ev(`document.querySelector('.language-switch [aria-current=page]').textContent===${JSON.stringify(language==='en'?'EN':'中文')}`),name+' active language link');
   assert(await ev(`[...document.querySelectorAll('.work-card h3')].every(e=>e.textContent.trim())`),name+' artwork titles rendered');
+  assert(await ev(`JSON.parse(document.querySelector('#work-data').textContent).every(w=>{const c=document.querySelector('#work-'+w.id);return c.querySelector('.work-description').textContent===w[document.documentElement.lang==='en'?'description_en':'description'].replaceAll(String.fromCharCode(10),'')&&c.querySelector('time').textContent===w.year})`),name+' all artist statements and years visible inline');
+  assert(await ev(`document.querySelectorAll('.work-visual img').length===9`),name+' all nine artwork images visible inline');
   assert(await ev(`document.querySelectorAll('.artist-biography p').length===3 && document.querySelector('.artist-biography').textContent.includes(${JSON.stringify(language==='en'?'Joongbu University':'生于中国湖南')})`),name+' complete localized biography');
   assert(await ev(`!/[一-鿿]/.test(document.body.innerText.replace('中文',''))`)===(language==='en'),name+' single language content');
   assert(await ev('document.documentElement.scrollWidth<=innerWidth'),name+' no horizontal overflow');
@@ -34,7 +36,7 @@ async function main(){
   await ev('document.querySelector("[data-open]").click()');assert(await ev('document.querySelector("dialog").open'),name+' dialog opens');assert(await ev(`document.querySelector('#dialog-title').textContent===${JSON.stringify(language==='en'?'Zero-Sum World':'零和世界')} && !!document.querySelector('#dialog-description').textContent`),name+' localized dialog');await delay(200);await shot(name+'-dialog');
   await ev('document.querySelector("#next-work").click()');assert(await ev('document.querySelector("#dialog-counter").textContent.includes("03")'),name+' next artwork');
   await call('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});await call('Input.dispatchKeyEvent',{type:'keyUp',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});assert(await ev('!document.querySelector("dialog").open'),name+' escape closes');
-  await ev('document.querySelectorAll("[data-variant]")[1].click();document.querySelectorAll("[data-variant]")[1].closest(".work-card").querySelector("[data-open]").click()');assert(await ev('document.querySelectorAll(".view-thumb")[1].getAttribute("aria-pressed")==="true"'),name+' second view retained');
+  await ev(`[...document.querySelectorAll('[data-view]')].find(b=>b.dataset.view==='1').click()`);assert(await ev('document.querySelectorAll(".view-thumb")[1].getAttribute("aria-pressed")==="true"'),name+' second view opens correctly');
   await ev('document.querySelector("dialog").close()');
   await ev(`document.querySelector('.language-switch a:not([aria-current])').click()`);await delay(350);
   assert(await ev(`document.documentElement.lang===${JSON.stringify(language==='en'?'zh-CN':'en')}`),name+' language navigation works');
