@@ -76,13 +76,13 @@ page='''<!doctype html>
     <figcaption class="hero-caption"><strong>零和世界</strong></figcaption>
    </figure>
   </section>
+  <section class="artist-section" id="about" aria-labelledby="about-title">
+   <h2 class="section-title" id="about-title">个人简介</h2>
+   <div class="artist-biography">__BIOGRAPHY__</div>
+  </section>
   <section class="catalogue" id="works" aria-labelledby="works-title">
    <div class="section-top"><h2 class="section-title" id="works-title">作品</h2></div>
    <div class="work-grid">__CARDS__</div>
-  </section>
-  <section class="artist-section" id="about" aria-labelledby="about-title">
-   <h2 class="section-title" id="about-title">关于</h2>
-   <div class="artist-biography">__BIOGRAPHY__</div>
   </section>
   <section class="colophon" id="colophon" aria-labelledby="colophon-title">
    <div><span class="micro">COLOPHON</span><h2 id="colophon-title">关于这个选集</h2></div>
@@ -109,6 +109,7 @@ page='''<!doctype html>
 '''
 copy={
  '跳到作品':'Skip to artworks', '作品':'Works', '目录':'Index', '图录':'Catalogue', '关于':'About',
+ '个人简介':'Artist biography',
  '写诗也写代码。':'Poetry and code.',
  '将图视为符，也视符为图。':'Images as signs. Signs as images.',
  '作品名称据原始图录，英文名称为工作译名。作品说明为网页整理文字，个人简介由艺术家提供。':'Chinese artwork titles follow the source catalogue; English titles are working translations. Artwork descriptions were prepared for this website. The biography was provided by the artist.',
