@@ -32,3 +32,5 @@ dialog{width:min(1320px,calc(100vw - 48px));max-width:none;max-height:calc(100dv
 .colophon>div.colophon-content{display:block}
 /* Smaller introductory image, shown in full at its original proportions. */
 .hero-portrait{width:min(100%,400px);max-width:400px;justify-self:center}.hero-portrait img{width:100%;height:auto;object-fit:contain}.hero{min-height:650px;padding-bottom:90px}@media(max-width:700px){.hero-portrait{width:78%;max-width:320px;align-self:center}.hero{min-height:0;padding-bottom:65px}}
+/* Trim the thin top border in the displayed image and reduce its size to 80%. */
+.hero-portrait{width:min(100%,320px);max-width:320px}.hero-portrait img{clip-path:inset(.4% 0 0 0)}@media(max-width:700px){.hero-portrait{width:62.4%;max-width:256px}}
