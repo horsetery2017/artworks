@@ -41,8 +41,7 @@ def build(language):
     language_switch = f'''<div class="language-switch" role="group" aria-label="{text('语言', 'Language')}"><a href="index.html" lang="en" hreflang="en"{en_current}>EN</a><span aria-hidden="true">/</span><a href="zh.html" lang="zh-CN" hreflang="zh-CN"{zh_current}>中文</a></div>'''
     name = field(artist, 'name')
     biography = ''.join(f'<p>{esc(p)}</p>' for p in field(artist, 'biography'))
-    hero_title = field(works[1], 'title')
-    hero_alt = text('零和世界 · 黑白球体构成的数字图像', 'Zero-Sum World · A digital image of black and white spheres')
+    hero_alt = text('人物水墨绘画，背景有山水与弯月', 'An ink painting of a figure, with a landscape and crescent moon')
     title = text('陈国军 · 作品选集', 'Chen Guojun · Selected Works')
     description = text('陈国军的作品与个人简介：数字媒体、互动装置与电子游戏。', 'Selected works and biography of Chen Guojun: digital media, interactive installations and video games.')
     note = text('作品图像据原始图录。作品说明、年代及个人简介由艺术家提供；英文为译文。', 'Artwork images are drawn from the source catalogue. Descriptions, dates and biography were provided by the artist; the English text is a translation.')
@@ -72,7 +71,7 @@ def build(language):
 <div class="shell">
  <header class="site-header">
   <a class="brand" href="{filename}" aria-label="{text('陈国军作品集首页', 'Chen Guojun portfolio home')}"><span class="brand-name">{esc(name)}</span></a>
-  <div class="header-links"><nav class="nav" aria-label="{text('主导航', 'Main navigation')}"><a href="#works">{text('作品', 'Works')}</a><a href="#about">{text('关于', 'About')}</a><a href="assets/chen-guojun-selected-works.pdf" target="_blank" rel="noopener">PDF ↗</a></nav>{language_switch}</div>
+  <div class="header-links"><nav class="nav" aria-label="{text('主导航', 'Main navigation')}"><a href="#works">{text('作品', 'Works')}</a><a href="#about">{text('关于', 'About')}</a></nav>{language_switch}</div>
  </header>
  <main>
   <section class="hero" aria-labelledby="artist-name">
@@ -82,7 +81,7 @@ def build(language):
     <p class="hero-description">{text('写诗也写代码。', 'Poetry and code.')}<br>{text('将图视为符，也视符为图。', 'Images as signs. Signs as images.')}</p>
     <div class="hero-bottom"><a class="browse-link" href="#works">{text('浏览作品', 'Browse works')} <span aria-hidden="true">↓</span></a></div>
    </div>
-   <figure class="hero-art"><button class="image-button" type="button" data-open="zero-sum" aria-label="{esc(text('查看《零和世界》大图', 'View Zero-Sum World'))}">{image('zero-sum', hero_alt, True)}</button><figcaption class="hero-caption"><strong>{esc(hero_title)}</strong></figcaption></figure>
+   <figure class="hero-art hero-portrait"><img src="assets/images/works.jpg" width="1231" height="1114" alt="{esc(hero_alt)}" loading="eager" decoding="async" fetchpriority="high"></figure>
   </section>
   <section class="artist-section" id="about" aria-labelledby="about-title">
    <h2 class="section-title" id="about-title">{text('个人简介', 'About')}</h2>

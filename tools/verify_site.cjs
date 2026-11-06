@@ -33,7 +33,7 @@ async function main(){
   assert(await ev('document.documentElement.scrollWidth<=innerWidth'),name+' no horizontal overflow');
   await shot(name);
   const metrics=await call('Page.getLayoutMetrics');const full=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width,height:Math.ceil(metrics.cssContentSize.height),scale:1}});fs.writeFileSync(path.join(qa,name+'-full.png'),Buffer.from(full.data,'base64'));
-  await ev('document.querySelector("[data-open]").click()');assert(await ev('document.querySelector("dialog").open'),name+' dialog opens');assert(await ev(`document.querySelector('#dialog-title').textContent===${JSON.stringify(language==='en'?'Zero-Sum World':'零和世界')} && !!document.querySelector('#dialog-description').textContent`),name+' localized dialog');await delay(200);await shot(name+'-dialog');
+  await ev('document.querySelector("#work-zero-sum [data-open]").click()');assert(await ev('document.querySelector("dialog").open'),name+' dialog opens');assert(await ev(`document.querySelector('#dialog-title').textContent===${JSON.stringify(language==='en'?'Zero-Sum World':'零和世界')} && !!document.querySelector('#dialog-description').textContent`),name+' localized dialog');await delay(200);await shot(name+'-dialog');
   await ev('document.querySelector("#next-work").click()');assert(await ev('document.querySelector("#dialog-counter").textContent.includes("03")'),name+' next artwork');
   await call('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});await call('Input.dispatchKeyEvent',{type:'keyUp',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});assert(await ev('!document.querySelector("dialog").open'),name+' escape closes');
   await ev(`[...document.querySelectorAll('[data-view]')].find(b=>b.dataset.view==='1').click()`);assert(await ev('document.querySelectorAll(".view-thumb")[1].getAttribute("aria-pressed")==="true"'),name+' second view opens correctly');
@@ -42,7 +42,7 @@ async function main(){
   assert(await ev(`document.documentElement.lang===${JSON.stringify(language==='en'?'zh-CN':'en')}`),name+' language navigation works');
  }
  }
- await call('Page.navigate',{url:require('node:url').pathToFileURL(path.join(root,'index.html')).href});await delay(400);await ev('document.querySelector("[data-open]").click()');assert(await ev('document.querySelector("dialog").open'),'file URL opens without server');
+ await call('Page.navigate',{url:require('node:url').pathToFileURL(path.join(root,'index.html')).href});await delay(400);await ev('document.querySelector("#work-zero-sum [data-open]").click()');assert(await ev('document.querySelector("dialog").open'),'file URL opens without server');
  assert(errors.length===0,'no browser errors');await call('Browser.close');fs.writeFileSync(path.join(qa,'report.json'),JSON.stringify({checks,errors},null,2));console.log(JSON.stringify({checks,errors},null,2));
 }
 main().catch(e=>{console.error(e);process.exitCode=1}).finally(()=>{ws?.close();if(browser?.exitCode===null)browser.kill();server.close()});
