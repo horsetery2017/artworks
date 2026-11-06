@@ -21,7 +21,8 @@ async function main(){
   await ev(`Promise.all([...document.images].filter(i=>i.getAttribute('src')).map(i=>{i.loading='eager';return i.decode()})).then(()=>document.fonts.ready).then(()=>true)`);
   assert(await ev('document.querySelectorAll(".work-card").length===8'),name+' eight artworks');
   assert(await ev('JSON.parse(document.querySelector("#work-data").textContent).every(w=>w.title_en&&w.category_en&&w.description_en&&w.images.every(i=>i.label_en))'),name+' bilingual artwork metadata');
-  assert(await ev('[...document.querySelectorAll(".work-card")].every(c=>c.querySelector("h3 [lang=en]")&&c.querySelector(".work-description [lang=en]"))'),name+' bilingual titles and descriptions rendered');
+  assert(await ev('[...document.querySelectorAll(".work-card")].every(c=>c.querySelector("h3 [lang=en]"))'),name+' bilingual artwork titles rendered');
+  assert(await ev('document.querySelectorAll(".bio-zh p").length===3 && document.querySelectorAll(".bio-en p").length===3 && document.querySelector(".bio-en").textContent.includes("Joongbu University")'),name+' complete bilingual artist biography');
   assert(await ev('document.documentElement.scrollWidth<=innerWidth'),name+' no horizontal overflow');
   await shot(name);
   const metrics=await call('Page.getLayoutMetrics');const full=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width,height:Math.ceil(metrics.cssContentSize.height),scale:1}});fs.writeFileSync(path.join(qa,name+'-full.png'),Buffer.from(full.data,'base64'));

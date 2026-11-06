@@ -5,6 +5,7 @@ import json
 
 ROOT=Path(__file__).resolve().parents[1]
 works=json.loads((ROOT/'works.json').read_text(encoding='utf-8'))
+artist=json.loads((ROOT/'artist.json').read_text(encoding='utf-8'))
 manifest={x['slug']:x for x in json.loads((ROOT/'assets/image-manifest.json').read_text(encoding='utf-8'))}
 esc=html.escape
 
@@ -35,9 +36,6 @@ for i,w in enumerate(works):
     {variant}
   </div>
   <div class="work-heading"><span class="work-number">{number}</span><h3>{esc(w['title'])}{subtitle}<span class="en" lang="en">{esc(w['title_en'])}{' ('+esc(w['subtitle_en'])+')' if w.get('subtitle_en') else ''}</span></h3></div>
-  <p class="work-category">{bi(w['category'],w['category_en'])}</p>
-  <p class="work-description">{bi(w['description'],w['description_en'])}</p>
-  <div class="work-foot"><button class="open-text" type="button" data-open="{w['id']}">{bi('查看作品','View artwork')} <span aria-hidden="true">↗</span></button><span class="work-view-count">{bi(str(len(w['images']))+' 幅图像',str(len(w['images']))+(' image' if len(w['images'])==1 else ' images'))}</span></div>
 </article>''')
     index.append(f'<li><a href="#work-{w["id"]}"><span class="index-no">{number}</span><span>{bi(w["title"],w["title_en"])}</span><span aria-hidden="true">↗</span></a></li>')
 
@@ -62,7 +60,7 @@ page='''<!doctype html>
 <div class="shell">
  <header class="site-header">
   <a class="brand" href="#top" aria-label="陈国军作品集首页"><span class="brand-zh">陈国军</span><span class="brand-en">CHEN<br>GUOJUN</span></a>
-  <nav class="nav" aria-label="主导航"><a href="#works">作品</a><a href="#index">目录</a><a href="#colophon">图录</a><a class="pdf-link" href="assets/chen-guojun-selected-works.pdf" target="_blank" rel="noopener"><span class="pdf-word">原始 </span>PDF <span aria-hidden="true">↗</span></a></nav>
+  <nav class="nav" aria-label="主导航"><a href="#works">作品</a><a href="#about">关于</a><a class="pdf-link" href="assets/chen-guojun-selected-works.pdf" target="_blank" rel="noopener">PDF <span aria-hidden="true">↗</span></a></nav>
  </header>
  <main>
   <section class="hero" aria-labelledby="artist-name">
@@ -70,32 +68,32 @@ page='''<!doctype html>
     <div class="eyebrow">SELECTED WORKS / 作品选集</div>
     <h1 id="artist-name">陈国军</h1>
     <p class="artist-roman">CHEN GUOJUN</p>
-    <p class="hero-description">装置、互动与数字图像。<br>一份关于空间、界面与物的作品记录。</p>
-    <div class="hero-bottom"><a class="browse-link" href="#works">浏览作品 <span aria-hidden="true">↓</span></a><div class="hero-count">08<span>件作品 / 09 幅图像</span></div></div>
+    <p class="hero-description">写诗也写代码。<br>将图视为符，也视符为图。</p>
+    <div class="hero-bottom"><a class="browse-link" href="#works">浏览作品 <span aria-hidden="true">↓</span></a></div>
    </div>
    <figure class="hero-art">
     <button class="image-button" type="button" data-open="zero-sum" aria-label="查看《零和世界》大图">__HERO__</button>
-    <figcaption class="hero-caption"><strong>零和世界</strong><span>02 / 08 · 数字图像</span></figcaption>
+    <figcaption class="hero-caption"><strong>零和世界</strong></figcaption>
    </figure>
   </section>
   <section class="catalogue" id="works" aria-labelledby="works-title">
-   <div class="section-top"><div><span class="micro">A SELECTION / 01—08</span><h2 class="section-title" id="works-title">作品</h2></div><div class="section-aside">循图像，进入作品。<br>点击查看完整大图</div></div>
+   <div class="section-top"><h2 class="section-title" id="works-title">作品</h2></div>
    <div class="work-grid">__CARDS__</div>
   </section>
-  <section class="index-section" id="index" aria-labelledby="index-title">
-   <div><span class="micro">WORK INDEX</span><h2 class="section-title" id="index-title">目录</h2></div>
-   <ol class="index-list">__INDEX__</ol>
+  <section class="artist-section" id="about" aria-labelledby="about-title">
+   <h2 class="section-title" id="about-title">关于</h2>
+   <div class="artist-biography">__BIOGRAPHY__</div>
   </section>
   <section class="colophon" id="colophon" aria-labelledby="colophon-title">
    <div><span class="micro">COLOPHON</span><h2 id="colophon-title">关于这个选集</h2></div>
    <div class="colophon-content">
     <p>本页整理《陈国军部分作品》中的八件作品与九幅图像。《向量空间》保留两个观看视角；作品图像按原始比例呈现。</p>
-    <p class="colophon-note">作品名称据原始图录。简短图像说明为网页整理文字。原资料未提供的创作年份、尺寸与艺术家履历，未在此页补写。</p>
+    <p class="colophon-note">作品名称据原始图录，英文名称为工作译名。作品说明为网页整理文字，个人简介由艺术家提供。</p>
     <a class="download" href="assets/chen-guojun-selected-works.pdf" download="陈国军部分作品.pdf">下载原始作品集 <span>PDF · 11.2 MB <span aria-hidden="true">↗</span></span></a>
    </div>
   </section>
  </main>
- <footer class="site-footer"><span>陈国军 / CHEN GUOJUN</span><span>SELECTED WORKS<br>作品图像与名称据原始图录整理</span></footer>
+ <footer class="site-footer"><span>陈国军 / CHEN GUOJUN</span><a href="#top">回到顶部<span class="en" lang="en">Back to top ↑</span></a></footer>
 </div>
 <dialog id="work-dialog" aria-labelledby="dialog-title">
  <div class="dialog-top"><span id="dialog-counter">作品</span><button class="close-dialog" type="button" aria-label="关闭大图">×</button></div>
@@ -110,7 +108,10 @@ page='''<!doctype html>
 </html>
 '''
 copy={
- '跳到作品':'Skip to artworks', '作品':'Works', '目录':'Index', '图录':'Catalogue',
+ '跳到作品':'Skip to artworks', '作品':'Works', '目录':'Index', '图录':'Catalogue', '关于':'About',
+ '写诗也写代码。':'Poetry and code.',
+ '将图视为符，也视符为图。':'Images as signs. Signs as images.',
+ '作品名称据原始图录，英文名称为工作译名。作品说明为网页整理文字，个人简介由艺术家提供。':'Chinese artwork titles follow the source catalogue; English titles are working translations. Artwork descriptions were prepared for this website. The biography was provided by the artist.',
  '装置、互动与数字图像。':'Installations, interaction and digital imagery.',
  '一份关于空间、界面与物的作品记录。':'A record of works exploring space, interfaces and objects.',
  '浏览作品':'Browse works', '件作品 / 09 幅图像':'works / 09 images',
@@ -143,6 +144,7 @@ page=page.replace('装置、互动与数字图像。">','装置、互动与数�
 page=page.replace('八件作品，九幅图像。装置、互动与数字图像的作品记录。','八件作品，九幅图像。装置、互动与数字图像的作品记录。 / Eight works, nine images. Installations, interaction and digital imagery.')
 page=page.replace('__HERO__',image('zero-sum','零和世界 / Zero-Sum World · 黑白球体构成的数字图像 / A digital image of black and white spheres',True))
 page=page.replace('__CARDS__','\n'.join(cards)).replace('__INDEX__','\n'.join(index))
+page=page.replace('__BIOGRAPHY__','<div class="bio-zh" lang="zh-CN">'+''.join(f'<p>{esc(p)}</p>' for p in artist['biography'])+'</div><div class="bio-en" lang="en">'+''.join(f'<p>{esc(p)}</p>' for p in artist['biography_en'])+'</div>')
 page=page.replace('__DATA__',json.dumps(works,ensure_ascii=False).replace('</','<\\/'))
 (ROOT/'index.html').write_text(page,encoding='utf-8')
 (ROOT/'.nojekyll').touch()
